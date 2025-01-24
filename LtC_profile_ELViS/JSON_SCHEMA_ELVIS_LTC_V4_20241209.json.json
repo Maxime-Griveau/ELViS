@@ -1,0 +1,496 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Latimer Core profile for ELViS, version 0.2.0",
+  "title": "LtC profile, ELViS",
+  "type": "object",
+  "properties": {
+    "definitions": {
+      "Address": {
+        "type": "object",
+        "description": "A hierarchical representation of an address.",
+        "properties": {
+          "schema:addressCountry": {
+            "type": "object",
+            "description": "The country in which the entity is located.",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "The country code using ISO 3166 (Alpha 3).",
+                "examples": [
+                  "AFG",
+                  "FRA",
+                  "FIN"
+                ]
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "schema:addressRegion": {
+            "type": "object",
+            "description": "The region in the country.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the region.",
+                "examples": [
+                  "Pays-de-la-Loire",
+                  "Valais"
+                ]
+              }
+            }
+          },
+          "schema:addressLocality": {
+            "type": "object",
+            "description": "The locality in the region.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the locality.",
+                "examples": [
+                  "Geneva",
+                  "Paris",
+                  "London"
+                ]
+              },
+              "schema:streetAddress": {
+                "type": "string",
+                "description": "The street address.",
+                "examples": [
+                  "Rue de la Navigation 52",
+                  "57 rue Cuvier"
+                ]
+              },
+              "schema:postalCode": {
+                "type": "integer",
+                "description": "The postal code of the address.",
+                "examples": [
+                  75005,
+                  1201
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "schema:streetAddress"
+            ]
+          }
+        },
+        "required": [
+          "schema:addressCountry"
+        ]
+      },
+      "Identifier": {
+        "type": "object",
+        "description": "Details about the identifier.",
+        "properties": {
+          "ltc:identifierSource": {
+            "type": "string",
+            "description": "The source or creator of the identifier.",
+            "examples": [
+              "GBIF Registry",
+              "CETAF"
+            ]
+          },
+          "ltc:identifierType": {
+            "type": "string",
+            "description": "The type and format of the value in the identifier field.",
+            "examples": [
+              "CETAF_ID"
+            ]
+          },
+          "ltc:identifierValue": {
+            "type": "string",
+            "description": "An unambiguous reference.",
+            "examples": [
+              "https://cetaf.org/botanic-garden-meise-0"
+            ]
+          }
+        },
+        "required": [
+          "ltc:identifierSource",
+          "ltc:identifierValue"
+        ]
+      }
+    },
+    "Institution": {
+      "type": "object",
+      "description": "Top parent : 'Institution'",
+      "properties": {
+        "ltc:organisationalUnit": {
+          "type": "object",
+          "description": "Details about the institution",
+          "properties": {
+            "ltc:organisationalUnitName": {
+              "type": "string",
+              "description": "The name of the organisational unit (institution) in the local language.",
+              "example": "Mus\u00e9um national d'histoire naturelle"
+            },
+            "ltc:organisationUnitType": {
+              "type": "string",
+              "description": "The type of organisational unit, e.g., institution.",
+              "enum": [
+                "Institution"
+              ]
+            },
+            "ltc:description": {
+              "type": "string",
+              "description": "A short text describing the organisational unit.",
+              "example": "A description of the institution."
+            },
+            "schema:url": {
+              "type": "string",
+              "description": "The URL of the organisational unit's website.",
+              "example": "https://science.mnhn.fr/institution/mnhn",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "ltc:organisationalUnitName",
+            "ltc:organisationUnitType"
+          ]
+        },
+        "ltc:identifier": {
+          "$ref": "#/definitions/Identifier"
+        },
+        "ltc:Address": {
+          "$ref": "#/definitions/Address"
+        }
+      },
+      "required": [
+        "ltc:organisationalUnit",
+        "ltc:Address",
+        "ltc:identifier"
+      ]
+    },
+    "facilities": {
+      "type": "object",
+      "description": "The facilities that belong to this institution",
+      "properties": {
+        "type": "object",
+        "description": "Details about a facility",
+        "properties": {
+          "ltc:organisationalUnit": {
+            "type": "array",
+            "description": "Details about the facility",
+            "properties": {
+              "ltc:organisationalUnitName": {
+                "type": "string",
+                "description": "The name of the facility in the local language",
+                "example": "Virtual Morphology lab"
+              },
+              "ltc:organisationalUnitType": {
+                "type": "string",
+                "description": "The type of organisational unit. Facility in this case",
+                "const": "Facility"
+              },
+              "ltc:description": {
+                "type": "string",
+                "description": "A short text describing the facility",
+                "example": "Surface scanning, geometric morphometric modelling (3D landmark coordinates are measured by a MicroScribe digitiser on real anatomical objects or on 3D models of virtual anatomical objects. Statistical analysis of Cartesian landmark coordinates, 3D semilandmarks measurement and post-processing, virtual modelling, 3D printing (FDM, PLA))"
+              },
+              "schema:url": {
+                "type": "string",
+                "description": "The URL of the facility's webpage.",
+                "example": "https://www.mncn.csic.es/es/investigaci%C3%B3n/servicios-cientifico-tecnicos/laboratorio-de-morfologia-virtual",
+                "format": "uri"
+              },
+              "ltc:hasParentOrganisationalUnit": {
+                "type": "string",
+                "description": "A reference to the parent organisational unit (institution)",
+                "example": "Mus\u00e9um national d'histoire naturelle"
+              }
+            },
+            "required": [
+              "ltc:organisationalUnitName",
+              "ltc:organisationalUnitType",
+              "ltc:hasParentOrganisationalUnit"
+            ]
+          },
+          "schema:image": {
+            "type": "array",
+            "description": "A list of URLs of images related to this facility.",
+            "items": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL of an image representing the facility."
+            },
+            "examples": [
+              "https://example.com/image1.jpg",
+              "https://example.com/image2.jpg"
+            ]
+          },
+          "ltc:identifier": {
+            "$ref": "#/definitions/Identifier"
+          },
+          "ltc:Address": {
+            "$ref": "#/definitions/Address"
+          }
+        }
+      },
+      "required": [
+        "ltc:organisationalUnit"
+      ]
+    },
+    "InstrumentOrService": {
+      "type": "object",
+      "description": "The instrument or service that belong to this facility",
+      "properties": {
+        "type": "object",
+        "description": "Details about an instrument or a service",
+        "properties": {
+          "ltc:organisationalUnit": {
+            "type": "array",
+            "description": "Details about the instrument or service",
+            "properties": {
+              "ltc:organisationalUnitName": {
+                "type": "string",
+                "description": "The name of the instrument or service in the local language",
+                "example": "Alicona G5+ Infinite Focus Metrology microscope "
+              },
+              "ltc:organisationalUnitType": {
+                "type": "string",
+                "description": "The type of organisational unit. Instrument or service in this case",
+                "enum": [
+                  "Instrument",
+                  "Service"
+                ]
+              },
+              "ltc:description": {
+                "type": "string",
+                "description": "A short text describing the facility",
+                "example": "Surface scanning, geometric morphometric modelling (3D landmark coordinates are measured by a MicroScribe digitiser on real anatomical objects or on 3D models of virtual anatomical objects. Statistical analysis of Cartesian landmark coordinates, 3D semilandmarks measurement and post-processing, virtual modelling, 3D printing (FDM, PLA))"
+              },
+              "schema:url": {
+                "type": "string",
+                "description": "The URL of the facility's webpage.",
+                "example": "https://www.mncn.csic.es/es/investigaci%C3%B3n/servicios-cientifico-tecnicos/laboratorio-de-morfologia-virtual",
+                "format": "uri"
+              },
+              "ltc:hasParentOrganisationalUnit": {
+                "type": "string",
+                "description": "A reference to the parent organisational unit (facility)",
+                "example": "Virtual Morphology lab"
+              }
+            },
+            "required": [
+              "ltc:organisationalUnitName",
+              "ltc:organisationalUnitType",
+              "ltc:hasParentOrganisationalUnit"
+            ]
+          },
+          "schema:image": {
+            "type": "array",
+            "description": "A list of URLs of images related to this instrument or service.",
+            "items": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL of an image representing the instrument or service."
+            },
+            "examples": [
+              "https://example.com/instrument1.jpg",
+              "https://example.com/instrument2.jpg"
+            ]
+          },
+          "ltc:identifier": {
+            "$ref": "#/definitions/Identifier"
+          }
+        }
+      },
+      "required": [
+        "ltc:organisationalUnit"
+      ]
+    },
+    "person": {
+      "type": "object",
+      "description": "The person that work in an institution : it is mandatory to be member of an institution in order to be able to be desginate for other role than 'requestor' in ELViS",
+      "properties": {
+        "type": "object",
+        "description": "Details about the person",
+        "properties": {
+          "ltc:person": {
+            "type": "array",
+            "description": "Details about the person",
+            "properties": {
+              "schema:famillyName": {
+                "type": "string",
+                "description": "Family name, the last name of a person in France",
+                "example": "Dupont, Durand, Martin"
+              },
+              "schema:givenName": {
+                "type": "string",
+                "description": "Given name. In France, the first name of a person",
+                "example": "Maxime, Pierre, Christian, Elvis"
+              },
+              "ltc:hasContactDetail": {
+                "type": "array",
+                "description": "Details of methods by which an entity such as a Person or OrganisationalUnit may be contacted.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ltc:contactDetailCategory": {
+                      "type": "string",
+                      "description": "The method of contact to which the contact detail applies.",
+                      "enum": [
+                        "Email",
+                        "Telephone"
+                      ]
+                    },
+                    "ltc:contactDetailValue": {
+                      "type": "string",
+                      "description": "The value of the contact detail (e.g., email address or phone number).",
+                      "examples": [
+                        "elvisinthedissco@malinator.com",
+                        "+123456789"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ltc:contactDetailCategory",
+                    "ltc:contactDetailValue"
+                  ]
+                },
+                "example": [
+                  {
+                    "ltc:contactDetailCategory": "Email",
+                    "ltc:contactDetailValue": "elvisinthedissco@malinator.com"
+                  },
+                  {
+                    "ltc:contactDetailCategory": "Telephone",
+                    "ltc:contactDetailValue": "+123456789"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "ltc:hasContactDetail",
+              "schema:famillyName",
+              "schema:givenName"
+            ]
+          }
+        },
+        "required": [
+          "ltc:person"
+        ]
+      }
+    },
+    "collections": {
+      "type": "object",
+      "description": "The collections that belong to this institution.",
+      "properties": {
+        "type": "object",
+        "description": "Details about a collection.",
+        "properties": {
+          "ltc:organisationalUnit": {
+            "type": "array",
+            "description": "Details about a collection",
+            "properties": {
+              "ltc:organisationalUnitName": {
+                "type": "string",
+                "description": "The name of the collection in the local language.",
+                "example": "Herbarium Collection"
+              },
+              "ltc:organisationUnitType": {
+                "type": "string",
+                "description": "The type of organisational unit, in this case: collection.",
+                "const": "Collection"
+              },
+              "ltc:description": {
+                "type": "string",
+                "description": "A short text describing the collection.",
+                "example": "L'ensemble des collections d'arthropodes terrestres est compos\u00e9 des insectes, des arachnides et des myriapodes."
+              },
+              "schema:url": {
+                "type": "string",
+                "description": "The URL of the collection's webpage.",
+                "example": "https://science.mnhn.fr/institution/mnhn/item/search#zoology.vertebrates",
+                "format": "uri"
+              },
+              "ltc:hasParentOrganisationalUnit": {
+                "type": "string",
+                "description": "A reference to the parent organisational unit (institution).",
+                "example": "Mus\u00e9um national d'histoire naturelle"
+              }
+            },
+            "required": [
+              "ltc:organisationalUnitName",
+              "ltc:organisationalUnitType",
+              "ltc:hasParentOrganisationalUnit"
+            ]
+          },
+          "ltc:conditionsOfAccess": {
+            "type": "string",
+            "description": "The conditon of access to this collection, this need to be a link",
+            "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
+          },
+          "ltc:identifier": {
+            "$ref": "#/definitions/Identifier"
+          }
+        }
+      },
+      "required": [
+        "ltc:organisationalUnit",
+        "ltc:conditionsOfAccess"
+      ]
+    },
+    "sub-collections": {
+      "type": "object",
+      "description": "sub-collections attached to a collection.",
+      "properties": {
+        "type": "object",
+        "description": "Details about a collection.",
+        "properties": {
+          "ltc:organisationalUnit": {
+            "type": "array",
+            "description": "Details about a collection",
+            "properties": {
+              "ltc:organisationalUnitName": {
+                "type": "string",
+                "description": "The name of the sub-collection in the local language.",
+                "example": "Arachnides"
+              },
+              "ltc:organisationUnitType": {
+                "type": "string",
+                "description": "The type of organisational unit, in this case: sub-collection.",
+                "const": "Sub-collection"
+              },
+              "ltc:description": {
+                "type": "string",
+                "description": "A short text describing the subcollection.",
+                "example": "La collection des arachnides du Mus\u00e9um figure parmi les plus grandes collections mondiales et ce dans presque tous les ordres. Elle comprend des sp\u00e9cimens provenant du monde entier. Sous le terme d\u2019Arachnides sont regroup\u00e9s les onze ordres suivants : acariens, amblypyges, araign\u00e9es, opilions, palpigrades, pseudoscorpions, ricinicules, schizomides, scorpions, solifuges et uropyges."
+              },
+              "schema:url": {
+                "type": "string",
+                "description": "The URL of the sub-collection's webpage.",
+                "example": "https://www.mnhn.fr/fr/collection-des-arachnides",
+                "format": "uri"
+              },
+              "ltc:hasParentOrganisationalUnit": {
+                "type": "string",
+                "description": "A reference to the parent organisational unit (collection).",
+                "example": "Zoologie - Invert\u00e9br\u00e9s"
+              }
+            },
+            "required": [
+              "ltc:organisationalUnitName",
+              "ltc:organisationalUnitType",
+              "hasParentOrganisationalUnit"
+            ]
+          },
+          "ltc:identifier": {
+            "$ref": "#/definitions/Identifier"
+          }
+        }
+      },
+      "required": [
+        "ltc:organisationalUnit"
+      ]
+    }
+  },
+  "required": [
+    "Institution",
+    "Collection"
+  ]
+}
