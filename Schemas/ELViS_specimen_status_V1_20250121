@@ -1,0 +1,175 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis_specimen_status.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "description": "Schema to turn ELViS' specimen status into digital objects",
+  "$comment": "ELViS specimen status 0.0.1",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "The unique identifier of the status, follows the Digital Object Identifier (DOI) standard",
+          "pattern": "^https://doi\\.org/[\\w\\.]+/(\\w){3}-(\\w){3}-(\\w){3}",
+          "examples": [
+            "https://doi.org/10.22/XXX-XXX-XXX"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the project that is currently using the specimen",
+          "examples": ["Taxonomic review on hemiptera"]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date the project was submitted"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the project"
+        },
+        "projectType": {
+          "type": "string",
+          "description": "Type of the project",
+          "enum": [
+            "A scientific study or research project",
+            "A consultation project",
+            "An exhibition project",
+            "An educational or teaching project",
+            "A project for an event that is non-scientific and non-cultural",
+            "An artistic or journalistic project",
+            "A film-related or photographic project"
+          ]
+        },
+        "applicantProfile": {
+          "type": "string",
+          "description": "Profile of the applicant",
+          "enum": [
+            "A professional scientist associated with an institution",
+            "An amateur resarcher or scientist",
+            "A teacher",
+            "An artist or a journalist",
+            "An employee of a cultural, museum, exhibition, or collection department",
+            "An event operator in another field",
+            "A private individual"
+          ]
+        },
+        "applicantInstitution": {
+          "type": "string",
+          "description": "Institution of the applicant, can be null for none research project (e.g. journalists, artists, etc.)"
+  
+        },
+        "ods:applicantInstitutionID": {
+            "type": "string",
+            "description": "ROR or Wikidata identifier of the institution",
+            "pattern": "^(https?://ror\\.org/0\\w{6}[0-9]{2})|^(https?://www\\.wikidata\\.org/wiki/Q\\w+)",
+            "examples": [
+              "https://ror.org/015hz7p22",
+              "https://www.wikidata.org/wiki/Q641676",
+              "https://ror.org/03wkt5x30"
+            ]
+          },
+
+        "hostInstitutionsName": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Host institution of the project",
+            "example":"[Muséum national d'histoire naturelle, Université Claude Bernard (Lyon 1)"
+          },
+          "description": "List of host institutions (can be multiple for calls purpose)"
+        },
+       "ods:hostInstitutionsID": {
+          "type": "string",
+          "description": "ROR or Wikidata identifier of the institution",
+          "pattern": "^(https?://ror\\.org/0\\w{6}[0-9]{2})|^(https?://www\\.wikidata\\.org/wiki/Q\\w+)",
+          "examples": [
+            "https://ror.org/015hz7p22",
+            "https://www.wikidata.org/wiki/Q641676",
+            "https://ror.org/03wkt5x30"
+          ]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the project"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the project"
+        },
+        "raidId": {
+          "type": "string",
+          "description": "RAID identifier of the project",
+          "pattern":"^10\\.\\d{4,5}/[a-zA-Z0-9]{8}",
+          "example":"10.82841/a1af46ed"
+       
+        },
+       
+        "scientificDomain": {
+          "type": "string",
+          "description": "Scientific domain of the project"
+        
+        },
+        "studyMethod": {
+          "type": "string",
+          "description": "Study method used in the project"
+          
+        },
+        "theme": {
+          "type": "string",
+          "description": "Theme of the project"
+     
+        },
+        "needType": {
+          "type": "string",
+          "description": "Type of need",
+          "enum": [
+            "Loan",
+            "Visit",
+            "Garden observation",
+            "Sample",
+            "Digitization"
+          ]
+        },
+        "requestDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the request"
+        },
+        "requestedSpecimens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "DOI of the requested specimen"
+          },
+          "description": "List of requested specimen DOIs"
+        },
+        "issuedForAgent": {
+          "type": "string",
+          "description": "Agent issuing the request",
+          "const": "ELViS"
+        }
+      },
+      "required": [
+        "@id",
+        "title",
+        "submissionDate",
+        "description",
+        "type",
+        "applicantProfile",
+        "hostInstitutions",
+        "startDate",
+        "endDate",
+        "needType",
+        "requestDate",
+        "requestedSpecimens",
+        "issuedForAgent"
+      ]
+    }
+  }
+}
+
