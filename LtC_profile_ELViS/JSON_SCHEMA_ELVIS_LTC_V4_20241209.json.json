@@ -325,126 +325,158 @@
         "ltc:organisationalUnit"
       ]
     },
-    
     "Collections": {
-      "type": "object",
-      "description": "The collections that belong to this institution.",
-      "properties": {
         "type": "object",
-        "description": "Details about a collection.",
+        "description": "The collections that belong to this institution.",
         "properties": {
-          "ltc:organisationalUnit": {
-            "type": "array",
-            "description": "Details about a collection",
-            "properties": {
-              "ltc:organisationalUnitName": {
-                "type": "string",
-                "description": "The name of the collection in the local language.",
-                "example": "Herbarium Collection"
+          "type": "object",
+          "description": "Details about a collection.",
+          "properties": {
+            "ltc:organisationalUnit": {
+              "type": "array",
+              "description": "Details about a collection",
+              "properties": {
+                "ltc:organisationalUnitName": {
+                  "type": "string",
+                  "description": "The name of the collection in the local language.",
+                  "example": "Herbarium Collection"
+                },
+                "ltc:organisationUnitType": {
+                  "type": "string",
+                  "description": "The type of organisational unit, in this case: collection.",
+                  "const": "Collection"
+                },
+                "ltc:description": {
+                  "type": "string",
+                  "description": "A short text describing the collection.",
+                  "example": "L'ensemble des collections d'arthropodes terrestres est composé des insectes, des arachnides et des myriapodes."
+                },
+                "schema:url": {
+                  "type": "string",
+                  "description": "The URL of the collection's webpage.",
+                  "example": "https://science.mnhn.fr/institution/mnhn/item/search#zoology.vertebrates",
+                  "format": "uri"
+                },
+                "ltc:hasParentOrganisationalUnit": {
+                  "type": "string",
+                  "description": "A reference to the parent organisational unit (institution).",
+                  "example": "Muséum national d'histoire naturelle"
+                }
               },
-              "ltc:organisationUnitType": {
-                "type": "string",
-                "description": "The type of organisational unit, in this case: collection.",
-                "const": "Collection"
-              },
-              "ltc:description": {
-                "type": "string",
-                "description": "A short text describing the collection.",
-                "example": "L'ensemble des collections d'arthropodes terrestres est compos\u00e9 des insectes, des arachnides et des myriapodes."
-              },
-              "schema:url": {
-                "type": "string",
-                "description": "The URL of the collection's webpage.",
-                "example": "https://science.mnhn.fr/institution/mnhn/item/search#zoology.vertebrates",
-                "format": "uri"
-              },
-              "ltc:hasParentOrganisationalUnit": {
-                "type": "string",
-                "description": "A reference to the parent organisational unit (institution).",
-                "example": "Mus\u00e9um national d'histoire naturelle"
-              }
+              "required": [
+                "ltc:organisationalUnitName",
+                "ltc:organisationalUnitType",
+                "ltc:hasParentOrganisationalUnit"
+              ]
             },
-            "required": [
-              "ltc:organisationalUnitName",
-              "ltc:organisationalUnitType",
-              "ltc:hasParentOrganisationalUnit"
-            ]
-          },
-          "ltc:conditionsOfAccess": {
-            "type": "string",
-            "description": "The conditon of access to this collection, this need to be a link, the content must be at least the one included in the following page : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
-            "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
-          },
-          "ltc:identifier": {
-            "$ref": "#/definitions/Identifier"
+            "ltc:conditionsOfAccess": {
+              "type": "string",
+              "description": "The condition of access to this collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
+              "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
+              "$comment": "This field is required if the collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
+            },
+            "livingOrPreserved": {
+              "enum": [
+                "Living",
+                "Preserved"
+              ],
+              "description": "State of specimen",
+            },
+            "ltc:identifier": {
+              "$ref": "#/definitions/Identifier"
+            }
           }
-        }
+        },
+        "required": [
+          "ltc:organisationalUnit"
+        ]
+      },
+      "Sub-collections": {
+        "properties": {
+          "type": "object",
+          "description": "Details about a sub-collection.",
+          "properties": {
+            "ltc:organisationalUnit": {
+              "type": "array",
+              "description": "Details about a sub-collection",
+              "properties": {
+                "ltc:organisationalUnitName": {
+                  "type": "string",
+                  "description": "The name of the sub-collection in the local language.",
+                  "example": "Arachnides"
+                },
+                "ltc:organisationUnitType": {
+                  "type": "string",
+                  "description": "The type of organisational unit, in this case: sub-collection.",
+                  "const": "Sub-collection"
+                },
+                "ltc:description": {
+                  "type": "string",
+                  "description": "A short text describing the sub-collection.",
+                  "example": "La collection des arachnides du Muséum figure parmi les plus grandes collections mondiales et ce dans presque tous les ordres."
+                },
+                "schema:url": {
+                  "type": "string",
+                  "description": "The URL of the sub-collection's webpage.",
+                  "example": "https://www.mnhn.fr/fr/collection-des-arachnides",
+                  "format": "uri"
+                },
+                "ltc:hasParentOrganisationalUnit": {
+                  "type": "string",
+                  "description": "A reference to the parent organisational unit (collection).",
+                  "example": "Zoologie - Invertébrés"
+                },
+                "ltc:conditionsOfAccess": {
+                  "type": "string",
+                  "description": "The condition of access to this sub-collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
+                  "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
+                }
+              },
+              "required": [
+                "ltc:organisationalUnitName",
+                "ltc:organisationalUnitType",
+                "ltc:hasParentOrganisationalUnit"
+              ]
+            },
+            "ltc:identifier": {
+              "$ref": "#/definitions/Identifier"
+            }
+          }
+        },
+        "required": [
+          "ltc:organisationalUnit"
+        ]
       },
       "required": [
-        "ltc:organisationalUnit"
-      ]
-    },
-    "Sub-collections": {
-      "type": "object",
-      "description": "sub-collections attached to a collection.",
-      "properties": {
-        "type": "object",
-        "description": "Details about a collection.",
-        "properties": {
-          "ltc:organisationalUnit": {
-            "type": "array",
-            "description": "Details about a collection",
-            "properties": {
-              "ltc:organisationalUnitName": {
-                "type": "string",
-                "description": "The name of the sub-collection in the local language.",
-                "example": "Arachnides"
+        "Institution",
+        "Collection"
+      ],
+      "dependencies": {
+        "ltc:conditionsOfAccess": {
+          "oneOf": [
+            {
+              "properties": {
+                "Collections": {
+                  "properties": {
+                    "ltc:conditionsOfAccess": { "type": "string" }
+                  }
+                }
               },
-              "ltc:organisationUnitType": {
-                "type": "string",
-                "description": "The type of organisational unit, in this case: sub-collection.",
-                "const": "Sub-collection"
-              },
-              "ltc:description": {
-                "type": "string",
-                "description": "A short text describing the subcollection.",
-                "example": "La collection des arachnides du Mus\u00e9um figure parmi les plus grandes collections mondiales et ce dans presque tous les ordres. Elle comprend des sp\u00e9cimens provenant du monde entier. Sous le terme d\u2019Arachnides sont regroup\u00e9s les onze ordres suivants : acariens, amblypyges, araign\u00e9es, opilions, palpigrades, pseudoscorpions, ricinicules, schizomides, scorpions, solifuges et uropyges."
-              },
-              "schema:url": {
-                "type": "string",
-                "description": "The URL of the sub-collection's webpage.",
-                "example": "https://www.mnhn.fr/fr/collection-des-arachnides",
-                "format": "uri"
-              },
-              "ltc:hasParentOrganisationalUnit": {
-                "type": "string",
-                "description": "A reference to the parent organisational unit (collection).",
-                "example": "Zoologie - Invert\u00e9br\u00e9s"
-              },
-              "ltc:conditionsOfAccess": {
-                "type": "string",
-                "description": "The conditon of access to this sub-collection, this need to be a link, the content must be at least the one included in the following page : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
-                "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
-              }
+              "required": ["ltc:conditionsOfAccess"]
             },
-            "required": [
-              "ltc:organisationalUnitName",
-              "ltc:organisationalUnitType",
-              "hasParentOrganisationalUnit"
-            ]
-          },
-          "ltc:identifier": {
-            "$ref": "#/definitions/Identifier"
-          }
+            {
+              "properties": {
+                "Sub-collections": {
+                  "properties": {
+                    "ltc:conditionsOfAccess": { "type": "string" }
+                  }
+                }
+              },
+              "required": ["ltc:conditionsOfAccess"]
+            }
+          ]
         }
-      },
-      "required": [
-        "ltc:organisationalUnit"
-      ]
+      }
     }
-  },
-  "required": [
-    "Institution",
-    "Collection"
-  ]
-}
+  }
+    
