@@ -1,0 +1,95 @@
+{
+    "$id": "https://schemas.dissco.tech/schemas/elvis_specimen_status.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "description": "Schema to turn ELViS' specimen status into digital objects",
+    "$comment": "ELViS specimen status 0.0.1",
+    "properties": {
+      "data": {
+        "type": "object",
+        "properties": {
+          "@id": {
+            "type": "string",
+            "description": "The unique identifier of the status, follows the handle standard",
+            "pattern": "^https:\/\/hdl\\.handle\\.net\/[\\d.]+\/\\w{3}-\\w{3}-\\w{3}",
+            "examples": [
+              "https://handle.net/10.22/XXX-XXX-XXX"
+            ]
+          },
+          "requestID": {
+            "type": "string",
+            "description": "The unique identifier of the status, follows the handle standard. This links the specimen status to a specific project.",
+            "pattern": "^https:\/\/hdl\\.handle\\.net\/[\\d.]+\/\\w{3}-\\w{3}-\\w{3}",
+            "examples": [
+              "https://handle.net/10.22/XXX-XXX-XXX"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the specimen corresponding to that digital object. By default,the specimen is Available.",
+            "enum": [
+              "Currently loaned",
+              "Currently visited",
+              "Currently digitized",
+              "Samples are currently made",
+              "On-going site visit",
+              "Planned visit",
+              "Planned loaning",
+              "Planned digitization",
+              "Planned sampling",
+              "Planned garden observation",
+              "Available"
+            ]
+          },
+          "projectTitle": {
+            "type": "string",
+            "description": "Title of the project associated with the specimen status",
+            "examples": ["Taxonomic review on hemiptera"]
+          },
+       "hostInstitutions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "hostInstitutionName": {
+                  "type": "string",
+                  "description": "Name of the host institution",
+                  "example": "Muséum national d'histoire naturelle"
+                },
+                "hostInstitutionID": {
+                  "type": "string",
+                  "description": "Unique identifier of the host institution",
+                  "example": "https://ror.org/03wkt5x30"
+                }
+              }
+            }
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the project request affecting the specimen."
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Start date of the project affecting the specimen."
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "description": "End date of the project affecting the specimen."
+          }
+        },
+        "required": [
+          "@id",
+          "requestID",
+          "status",
+          "projectTitle",
+          "hostInstitutions",
+          "requestDate",
+          "startDate",
+          "endDate"
+        ]
+      }
+    }
+  }
