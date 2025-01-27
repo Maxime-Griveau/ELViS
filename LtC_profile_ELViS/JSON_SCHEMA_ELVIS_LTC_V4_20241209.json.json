@@ -1,7 +1,7 @@
 {
   "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Latimer Core profile for ELViS, version 0.2.0",
+  "$comment": "Latimer Core profile for ELViS, version 0.3.0",
   "title": "LtC profile, ELViS",
   "type": "object",
   "properties": {
@@ -380,7 +380,126 @@
                 "Living",
                 "Preserved"
               ],
-              "description": "State of specimen",
+              "description": "State of specimen"
+            },
+              "topicDiscipline": {
+                "description": "Overarching classification of the scientific discipline to which the objects within the collection belong or are related.",
+                "type": "object",
+                "properties": {
+                  "Anthropology": {
+                    "type": "array",
+                    "description": "Categories related to Anthropology.",
+                    "items": {
+                      "enum": ["Human remains", "Hominid remains"]
+                    }
+                  },
+                  "Botany": {
+                    "type": "array",
+                    "description": "Categories related to Botany.",
+                    "items": {
+                      "enum": [
+                        "Macrofungi, Lichens & Myxomycetes (Mycology)",
+                        "Algae",
+                        "Bryophytes",
+                        "Pteridophytes",
+                        "Seed plants",
+                        "Plant Genetic Resources",
+                        "Other botany objects (e.g. mixed objects, Lycopodiophyta (clubmosses) and Equisetophyta (horsetails))"
+                      ]
+                    }
+                  },
+                  "Zoology": {
+                    "type": "array",
+                    "description": "Categories related to Zoology.",
+                    "items": {
+                      "enum": [
+                        "Insects",
+                        "Arachnids",
+                        "Crustaceans & Myriapods",
+                        "Porifera (sponges)",
+                        "Mollusca (bivalves, gastropods, cephalopods)",
+                        "Cnidaria (jellyfish, coral, anemones)",
+                        "Echinodermata (starfish, sea urchins, sea cucumbers)",
+                        "Fishes",
+                        "Amphibians",
+                        "Reptiles",
+                        "Birds",
+                        "Mammals",
+                        "Animal Genetic Resources",
+                        "Other zoology objects (e.g. mixed objects, Nematoda (roundworms), Platyhelminthes (flatworms), Annelida (segmented worms), Ctenophora (comb jellies), Brachiopoda (lamp shells), Bryozoa (moss animals), Chaetognatha (arrow worms), Hemichordata (acorn worms), Xenacoelomorpha (simple-bodied worms))"
+                      ]
+                    }
+                  },
+                  "Microbiology": {
+                    "type": "array",
+                    "description": "Categories related to Microbiology.",
+                    "items": {
+                      "enum": [
+                        "Phages",
+                        "Bacteria & Archaea",
+                        "Plasmids",
+                        "Protozoa",
+                        "Eukaryotic microorganisms",
+                        "Viruses (animal and plant viruses)",
+                        "Microfungi (including moulds, yeasts)",
+                        "Algae (in microbiology collection)",
+                        "Other microbiology objects (e.g. mixed or other kinds of microorganisms)"
+                      ]
+                    }
+                  },
+                  "Palaeontology": {
+                    "type": "array",
+                    "description": "Categories related to Palaeontology.",
+                    "items": {
+                      "enum": [
+                        "Botany fossils",
+                        "Invertebrate fossils",
+                        "Vertebrate fossils",
+                        "Other palaeontology objects (e.g. mixed or other kinds of fossils)"
+                      ]
+                    }
+                  },
+                  "Other Biodiversity/Geodiversity": {
+                    "type": "array",
+                    "description": "Categories related to Other Biodiversity/Geodiversity.",
+                    "items": {
+                      "enum": ["Unclassified"]
+                    }
+                  },
+                  "Earth Geology": {
+                    "type": "array",
+                    "description": "Categories related to Earth Geology.",
+                    "items": {
+                      "enum": [
+                        "Minerals and Gems (cut and polished precious mineral) (Mineralogy)",
+                        "Rocks (made up of multiple minerals) (Petrology)",
+                        "Loose sediment sample (sediment or particulate)",
+                        "Mixed solid matter sample (e.g. soil, cutting from a borehole)",
+                        "Water-ice sample",
+                        "Liquid or gaseous matter sample",
+                        "Mixed geology objects"
+                      ]
+                    }
+                  },
+                  "Astrogeology": {
+                    "type": "array",
+                    "description": "Categories related to Astrogeology.",
+                    "items": {
+                      "enum": ["Terrestrial finds/falls",
+                      "Terrestrial impacta", "Sample returns (objects originated from beyond the planet and carried to earth)"
+                      ]
+                    }
+                  },
+                  "Ecology": {
+                    "type": "array",
+                    "description": "Categories related to Ecology.",
+                    "items": {
+                      "enum": ["-"]
+                    }
+                  }
+                },
+                "required": ["Anthropology", "Botany", "Zoology", "Microbiology", "Palaeontology", "Other Biodiversity/Geodiversity", "Earth Geology", "Astrogeology", "Ecology"]
+              }
             },
             "ltc:identifier": {
               "$ref": "#/definitions/Identifier"
@@ -429,7 +548,8 @@
                 "ltc:conditionsOfAccess": {
                   "type": "string",
                   "description": "The condition of access to this sub-collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
-                  "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
+                  "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
+                  "$comment": "This field is required if the sub-collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
                 }
               },
               "required": [
@@ -447,11 +567,12 @@
           "ltc:organisationalUnit"
         ]
       },
+
       "required": [
         "Institution",
         "Collection"
       ],
-      "dependencies": {
+      "dependentSchemas": {
         "ltc:conditionsOfAccess": {
           "oneOf": [
             {
@@ -478,5 +599,5 @@
         }
       }
     }
-  }
+  
     
