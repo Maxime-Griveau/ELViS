@@ -70,6 +70,28 @@
                   75005,
                   1201
                 ]
+              },
+              "schema:GeoCoordinates":{
+                "type": "object",
+                "description": "The geographical coordinates of the address.",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "description": "The latitude of the address.",
+                    "examples": [
+                      46.2044,
+                      51.5074
+                    ]
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "description": "The longitude of the address.",
+                    "examples": [
+                      6.1432,
+                      -0.1278
+                    ]
+                  }
+                }
               }
             },
             "required": [
