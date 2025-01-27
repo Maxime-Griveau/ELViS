@@ -10,18 +10,18 @@
         "properties": {
           "@id": {
             "type": "string",
-            "description": "The unique identifier of the status, follows the handle standard",
-            "pattern": "^https:\/\/hdl\\.handle\\.net\/[\\d.]+\/\\w{3}-\\w{3}-\\w{3}",
+            "description": "The unique identifier of the status, follows the Digital Object Identifier (DOI) standard",
+            "pattern": "^https://doi\\.org/[\\w\\.]+/(\\w){3}-(\\w){3}-(\\w){3}",
             "examples": [
-              "https://handle.net/10.22/XXX-XXX-XXX"
+              "https://doi.org/10.22/XXX-XXX-XXX"
             ]
           },
           "requestID": {
             "type": "string",
-            "description": "The unique identifier of the status, follows the handle standard. This links the specimen status to a specific project.",
-            "pattern": "^https:\/\/hdl\\.handle\\.net\/[\\d.]+\/\\w{3}-\\w{3}-\\w{3}",
+            "description": "The unique identifier of the project, follows the Digital Object Identifier (DOI) standard. This links the specimen status to a specific project.",
+            "pattern": "^https://doi\\.org/[\\w\\.]+/(\\w){3}-(\\w){3}-(\\w){3}",
             "examples": [
-              "https://handle.net/10.22/XXX-XXX-XXX"
+              "https://doi.org/10.22/XXX-XXX-XXX"
             ]
           },
           "status": {
@@ -32,7 +32,7 @@
               "Currently visited",
               "Currently digitized",
               "Samples are currently made",
-              "On-going site visit",
+              "Someone is currenly visiting the specimen on site",
               "Planned visit",
               "Planned loaning",
               "Planned digitization",
@@ -46,23 +46,14 @@
             "description": "Title of the project associated with the specimen status",
             "examples": ["Taxonomic review on hemiptera"]
           },
-       "hostInstitutions": {
+          "hostInstitutions": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "hostInstitutionName": {
-                  "type": "string",
-                  "description": "Name of the host institution",
-                  "example": "Muséum national d'histoire naturelle"
-                },
-                "hostInstitutionID": {
-                  "type": "string",
-                  "description": "Unique identifier of the host institution",
-                  "example": "https://ror.org/03wkt5x30"
-                }
-              }
-            }
+              "type": "string",
+              "description": "Host institution(s) associated with the project",
+              "examples": ["Muséum national d'histoire naturelle", "Université Claude Bernard (Lyon 1)"]
+            },
+            "description": "List of host institutions related to the project affecting the specimen."
           },
           "requestDate": {
             "type": "string",
@@ -92,4 +83,4 @@
         ]
       }
     }
-  }
+}

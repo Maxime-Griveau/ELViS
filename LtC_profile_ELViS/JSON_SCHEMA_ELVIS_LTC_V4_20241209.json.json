@@ -155,7 +155,7 @@
         "ltc:identifier": {
           "$ref": "#/definitions/Identifier"
         },
-        "ltc:Address": {
+        "ltc:address": {
           "$ref": "#/definitions/Address"
         }
       },
@@ -165,7 +165,7 @@
         "ltc:identifier"
       ]
     },
-    "facilities": {
+    "Facilities": {
       "type": "object",
       "description": "The facilities that belong to this institution",
       "properties": {
@@ -376,7 +376,7 @@
         ]
       }
     },
-    "collections": {
+    "Collections": {
       "type": "object",
       "description": "The collections that belong to this institution.",
       "properties": {
@@ -435,7 +435,7 @@
         "ltc:conditionsOfAccess"
       ]
     },
-    "sub-collections": {
+    "Sub-collections": {
       "type": "object",
       "description": "sub-collections attached to a collection.",
       "properties": {

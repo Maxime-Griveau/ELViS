@@ -10,7 +10,7 @@
       "properties": {
         "@id": {
           "type": "string",
-          "description": "The unique identifier of the project, follows the Digital Object Identifier (DOI) standard",
+          "description": "The unique identifier of the project, follows the Digital Object Identifier handle standard",
           "pattern": "^https://doi\\.org/[\\w\\.]+/(\\w){3}-(\\w){3}-(\\w){3}",
           "examples": [
             "https://doi.org/10.22/XXX-XXX-XXX"
@@ -47,13 +47,13 @@
           "type": "string",
           "description": "Profile of the applicant",
           "enum": [
-            "A professional scientist associated with an institution",
-            "An amateur resarcher or scientist",
-            "A teacher",
-            "An artist or a journalist",
-            "An employee of a cultural, museum, exhibition, or collection department",
-            "An event operator in another field",
-            "A private individual"
+            "Professional scientist associated with an institution",
+            "Amateur resarcher or scientist",
+            "Teacher",
+            "Artist or a journalist",
+            "Employee of a cultural, museum, exhibition, or collection department",
+            "Event operator in another field",
+            "Private individual"
           ]
         },
         "applicantInstitution": {
@@ -61,7 +61,7 @@
           "description": "Institution of the applicant, can be null for none research project (e.g. journalists, artists, etc.)"
   
         },
-        "ods:applicantInstitutionID": {
+        "applicantInstitutionID": {
           "type": "string",
           "description": "ROR or Wikidata identifier of the institution",
           "pattern": "^(https?://ror\\.org/0\\w{6}[0-9]{2})|^(https?://www\\.wikidata\\.org/wiki/Q\\w+)",
@@ -71,7 +71,15 @@
             "https://ror.org/03wkt5x30"
           ]
         },
-
+        "hostInstitutions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Host institution of the project",
+            "example":"[Muséum national d'histoire naturelle, Université Claude Bernard (Lyon 1)"]
+          },
+          "description": "List of host institutions (can be multiple for calls purpose)"
+        },
         "hostInstitutionsName": {
           "type": "array",
           "items": {
@@ -81,7 +89,7 @@
           },
           "description": "List of host institutions (can be multiple for calls purpose)"
         },
-       "ods:hostInstitutionsID": {
+       "hostInstitutionsID": {
           "type": "string",
           "description": "ROR or Wikidata identifier of the institution",
           "pattern": "^(https?://ror\\.org/0\\w{6}[0-9]{2})|^(https?://www\\.wikidata\\.org/wiki/Q\\w+)",
