@@ -372,7 +372,7 @@
           },
           "ltc:conditionsOfAccess": {
             "type": "string",
-            "description": "The conditon of access to this collection, this need to be a link",
+            "description": "The conditon of access to this collection, this need to be a link, the content must be at least the one included in the following page : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
             "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
           },
           "ltc:identifier": {
@@ -381,8 +381,7 @@
         }
       },
       "required": [
-        "ltc:organisationalUnit",
-        "ltc:conditionsOfAccess"
+        "ltc:organisationalUnit"
       ]
     },
     "Sub-collections": {
@@ -421,6 +420,11 @@
                 "type": "string",
                 "description": "A reference to the parent organisational unit (collection).",
                 "example": "Zoologie - Invert\u00e9br\u00e9s"
+              },
+              "ltc:conditionsOfAccess": {
+                "type": "string",
+                "description": "The conditon of access to this sub-collection, this need to be a link, the content must be at least the one included in the following page : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
+                "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies"
               }
             },
             "required": [
