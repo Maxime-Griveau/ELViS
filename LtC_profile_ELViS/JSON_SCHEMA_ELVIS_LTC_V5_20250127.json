@@ -189,7 +189,7 @@
     },
     "Facilities": {
       "type": "object",
-      "description": "The facilities that belong to this institution",
+      "description": "The facilities that belong to this institution, this object needs to be repeted for each facility",
       "properties": {
         "type": "object",
         "description": "Details about a facility",
@@ -258,7 +258,7 @@
     },
     "InstrumentOrService": {
       "type": "object",
-      "description": "The instrument or service that belong to this facility",
+      "description": "The instrument or service that belong to this facility, this object needs to be repeted for each instrument or service",
       "properties": {
         "type": "object",
         "description": "Details about an instrument or a service",
@@ -328,7 +328,7 @@
     
       "Collections": {
         "type": "object",
-        "description": "The collections that belong to this institution.",
+        "description": "The collections that belong to this institution. This object needs to be repeted for each collection.",
         "properties": {
           "ltc:organisationalUnit": {
             "type": "array",
@@ -406,7 +406,7 @@
       },
       "Sub-collections": {
         "type": "object",
-        "description": "Details about a sub-collection.",
+        "description": "Details about a sub-collection. This object needs to be repeted for each sub-collection.",
         "properties": {
           "ltc:organisationalUnit": {
             "type": "array",
