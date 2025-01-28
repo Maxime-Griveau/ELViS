@@ -325,16 +325,16 @@
         "ltc:organisationalUnit"
       ]
     },
-    "Collections": {
+    
+      "Collections": {
         "type": "object",
         "description": "The collections that belong to this institution.",
         "properties": {
-          "type": "object",
-          "description": "Details about a collection.",
-          "properties": {
-            "ltc:organisationalUnit": {
-              "type": "array",
-              "description": "Details about a collection",
+          "ltc:organisationalUnit": {
+            "type": "array",
+            "description": "Details about a collection",
+            "items": {
+              "type": "object",
               "properties": {
                 "ltc:organisationalUnitName": {
                   "type": "string",
@@ -361,163 +361,58 @@
                   "type": "string",
                   "description": "A reference to the parent organisational unit (institution).",
                   "example": "Muséum national d'histoire naturelle"
+                },
+                "topicDiscipline": {
+                  "type": "string",
+                  "description": "Overarching classification of the scientific discipline to which the objects within the collection belong or are related.",
+                  "enum": [
+                    "Anthropology",
+                    "Botany",
+                    "Zoology",
+                    "Microbiology",
+                    "Palaeontology",
+                    "Other Biodiversity/Geodiversity",
+                    "Earth Geology",
+                    "Astrogeology",
+                    "Ecology"
+                  ]
+                },
+                "ltc:conditionsOfAccess": {
+                  "type": "string",
+                  "description": "The condition of access to this collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
+                  "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
+                  "$comment": "This field is required if the collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
+                },
+                "livingOrPreserved": {
+                  "enum": [
+                    "Living",
+                    "Preserved"
+                  ],
+                  "description": "State of specimen"
+                },
+                "ltc:identifier": {
+                  "$ref": "#/definitions/Identifier"
                 }
               },
               "required": [
                 "ltc:organisationalUnitName",
-                "ltc:organisationalUnitType",
-                "ltc:hasParentOrganisationalUnit"
+                "ltc:organisationUnitType",
+                "topicDiscipline"
               ]
-            },
-            "ltc:conditionsOfAccess": {
-              "type": "string",
-              "description": "The condition of access to this collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
-              "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
-              "$comment": "This field is required if the collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
-            },
-            "livingOrPreserved": {
-              "enum": [
-                "Living",
-                "Preserved"
-              ],
-              "description": "State of specimen"
-            },
-              "topicDiscipline": {
-                "description": "Overarching classification of the scientific discipline to which the objects within the collection belong or are related.",
-                "type": "object",
-                "properties": {
-                  "Anthropology": {
-                    "type": "array",
-                    "description": "Categories related to Anthropology.",
-                    "items": {
-                      "enum": ["Human remains", "Hominid remains"]
-                    }
-                  },
-                  "Botany": {
-                    "type": "array",
-                    "description": "Categories related to Botany.",
-                    "items": {
-                      "enum": [
-                        "Macrofungi, Lichens & Myxomycetes (Mycology)",
-                        "Algae",
-                        "Bryophytes",
-                        "Pteridophytes",
-                        "Seed plants",
-                        "Plant Genetic Resources",
-                        "Other botany objects (e.g. mixed objects, Lycopodiophyta (clubmosses) and Equisetophyta (horsetails))"
-                      ]
-                    }
-                  },
-                  "Zoology": {
-                    "type": "array",
-                    "description": "Categories related to Zoology.",
-                    "items": {
-                      "enum": [
-                        "Insects",
-                        "Arachnids",
-                        "Crustaceans & Myriapods",
-                        "Porifera (sponges)",
-                        "Mollusca (bivalves, gastropods, cephalopods)",
-                        "Cnidaria (jellyfish, coral, anemones)",
-                        "Echinodermata (starfish, sea urchins, sea cucumbers)",
-                        "Fishes",
-                        "Amphibians",
-                        "Reptiles",
-                        "Birds",
-                        "Mammals",
-                        "Animal Genetic Resources",
-                        "Other zoology objects (e.g. mixed objects, Nematoda (roundworms), Platyhelminthes (flatworms), Annelida (segmented worms), Ctenophora (comb jellies), Brachiopoda (lamp shells), Bryozoa (moss animals), Chaetognatha (arrow worms), Hemichordata (acorn worms), Xenacoelomorpha (simple-bodied worms))"
-                      ]
-                    }
-                  },
-                  "Microbiology": {
-                    "type": "array",
-                    "description": "Categories related to Microbiology.",
-                    "items": {
-                      "enum": [
-                        "Phages",
-                        "Bacteria & Archaea",
-                        "Plasmids",
-                        "Protozoa",
-                        "Eukaryotic microorganisms",
-                        "Viruses (animal and plant viruses)",
-                        "Microfungi (including moulds, yeasts)",
-                        "Algae (in microbiology collection)",
-                        "Other microbiology objects (e.g. mixed or other kinds of microorganisms)"
-                      ]
-                    }
-                  },
-                  "Palaeontology": {
-                    "type": "array",
-                    "description": "Categories related to Palaeontology.",
-                    "items": {
-                      "enum": [
-                        "Botany fossils",
-                        "Invertebrate fossils",
-                        "Vertebrate fossils",
-                        "Other palaeontology objects (e.g. mixed or other kinds of fossils)"
-                      ]
-                    }
-                  },
-                  "Other Biodiversity/Geodiversity": {
-                    "type": "array",
-                    "description": "Categories related to Other Biodiversity/Geodiversity.",
-                    "items": {
-                      "enum": ["Unclassified"]
-                    }
-                  },
-                  "Earth Geology": {
-                    "type": "array",
-                    "description": "Categories related to Earth Geology.",
-                    "items": {
-                      "enum": [
-                        "Minerals and Gems (cut and polished precious mineral) (Mineralogy)",
-                        "Rocks (made up of multiple minerals) (Petrology)",
-                        "Loose sediment sample (sediment or particulate)",
-                        "Mixed solid matter sample (e.g. soil, cutting from a borehole)",
-                        "Water-ice sample",
-                        "Liquid or gaseous matter sample",
-                        "Mixed geology objects"
-                      ]
-                    }
-                  },
-                  "Astrogeology": {
-                    "type": "array",
-                    "description": "Categories related to Astrogeology.",
-                    "items": {
-                      "enum": ["Terrestrial finds/falls",
-                      "Terrestrial impacta", "Sample returns (objects originated from beyond the planet and carried to earth)"
-                      ]
-                    }
-                  },
-                  "Ecology": {
-                    "type": "array",
-                    "description": "Categories related to Ecology.",
-                    "items": {
-                      "enum": ["-"]
-                    }
-                  }
-                },
-                "required": ["Anthropology", "Botany", "Zoology", "Microbiology", "Palaeontology", "Other Biodiversity/Geodiversity", "Earth Geology", "Astrogeology", "Ecology"]
-              }
-            },
-            "ltc:identifier": {
-              "$ref": "#/definitions/Identifier"
             }
           }
         },
-        "required": [
-          "ltc:organisationalUnit"
-        ]
+        "required": ["ltc:organisationalUnit"]
       },
       "Sub-collections": {
+        "type": "object",
+        "description": "Details about a sub-collection.",
         "properties": {
-          "type": "object",
-          "description": "Details about a sub-collection.",
-          "properties": {
-            "ltc:organisationalUnit": {
-              "type": "array",
-              "description": "Details about a sub-collection",
+          "ltc:organisationalUnit": {
+            "type": "array",
+            "description": "Details about a sub-collection",
+            "items": {
+              "type": "object",
               "properties": {
                 "ltc:organisationalUnitName": {
                   "type": "string",
@@ -543,29 +438,162 @@
                 "ltc:hasParentOrganisationalUnit": {
                   "type": "string",
                   "description": "A reference to the parent organisational unit (collection).",
-                  "example": "Zoologie - Invertébrés"
+                  "example": "Zoology"
                 },
+
                 "ltc:conditionsOfAccess": {
                   "type": "string",
                   "description": "The condition of access to this sub-collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
                   "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
                   "$comment": "This field is required if the sub-collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
+                },
+                "livingOrPreserved": {
+                  "enum": [
+                    "Living",
+                    "Preserved"
+                  ],
+                  "description": "State of specimen"
+                },
+              
+                "topicCategory": {
+                  "type": "string",
+                  "description": "Specific sub-classification within the topic discipline.",
+                  "oneOf": [
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Anthropology" } }
+                      },
+                      "then": {
+                        "enum": [
+                          "Human remains",
+                          "Hominids remains"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Botany" } }
+                      },
+                      "then": {
+                        "enum": [
+                          "Macrofungi, Lichens & Myxomycetes (Mycology)",
+                          "Algae",
+                          "Bryophytes",
+                          "Pteridophytes",
+                          "Seed plants",
+                          "Plant Genetic Resources",
+                          "Other botany objects (e.g. mixed objects, Lycopodiophyta (clubmosses) and Equisetophyta (horsetails))"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Zoology" } }
+                      },
+                      "then": {
+                        "enum": [
+                          "Insects",
+                          "Arachnids",
+                          "Crustaceans & Myriapods",
+                          "Porifera (sponges)",
+                          "Mollusca (bivalves, gastropods, cephalopods)",
+                          "Cnidaria (jellyfish, coral, anemones)",
+                          "Echinodermata (starfish, sea urchins, sea cucumbers)",
+                          "Fishes",
+                          "Amphibians",
+                          "Reptiles",
+                          "Birds",
+                          "Mammals",
+                          "Animal Genetic Resources",
+                          "Other zoology objects"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Microbiology" } }
+                      },
+                      "then": {
+                        "enum": [
+                          "Pages",
+                          "Bacteria & Archaea",
+                          "Plasmids",
+                          "Protozoa",
+                          "Eukaryotic microorganisms",
+                          "Viruses (animal and plant viruses)",
+                          "Microfungi (including moulds, yeasts)",
+                          "Algae (in microbiology collection)",
+                          "Other microbiology objects"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Palaeontology" } }
+                      },
+                      "then": {
+                        "enum": [
+                          "Botany fossils",
+                          "Invertebrate fossils",
+                          "Vertebrate fossils",
+                          "Other palaeontology objects"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Other Bio/Geo-diversity" } }
+                      },
+                      "then": {
+                        "type":"string"
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Earth-Geology" } }
+                      },
+                      "then": {
+                        "enum": [
+                          "Minerals and gems (cut and polished precious minerals)(Mineralogy)",
+                          "Rocks (made up of multiples minerals)(Petrology)",
+                          "Loose sediment sample (e.g. soil, cutting from a borehole)",
+                          "Water-ice samples",
+                          "Liquid or gaseous matter sample",
+                          "Mixed geology objects"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Astrogeology" } }
+                      },
+                      "then": {
+                       "type":"string",
+                       "$comment":"This field needs to have a controlled vocabulary (list containing the possible topicCategory)"
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": { "ltc:hasParentOrganisationalUnit": { "const": "Ecology" } }
+                      },
+                      "then": {
+                       "type":"string",
+                       "$comment":"This field needs to have a controlled vocabulary (list containing the possible topicCategory)"
+                      }
+                    }
+                  ]
                 }
               },
               "required": [
                 "ltc:organisationalUnitName",
-                "ltc:organisationalUnitType",
-                "ltc:hasParentOrganisationalUnit"
+                "ltc:organisationUnitType",
+                "ltc:hasParentOrganisationalUnit",
+                "topicCategory"
               ]
-            },
-            "ltc:identifier": {
-              "$ref": "#/definitions/Identifier"
             }
           }
         },
-        "required": [
-          "ltc:organisationalUnit"
-        ]
+        "required": ["ltc:organisationalUnit"]
       },
 
       "required": [
@@ -579,7 +607,9 @@
               "properties": {
                 "Collections": {
                   "properties": {
-                    "ltc:conditionsOfAccess": { "type": "string" }
+                    "ltc:conditionsOfAccess": { "type": "string" },
+                    "livingOrPreserved": { "type": "string" }
+                    
                   }
                 }
               },
@@ -589,7 +619,8 @@
               "properties": {
                 "Sub-collections": {
                   "properties": {
-                    "ltc:conditionsOfAccess": { "type": "string" }
+                    "ltc:conditionsOfAccess": { "type": "string" },
+                    "livingOrPreserved": { "type": "string" }
                   }
                 }
               },
@@ -599,5 +630,8 @@
         }
       }
     }
+  }
   
+    
+
     
