@@ -392,7 +392,10 @@
                 },
                 "ltc:identifier": {
                   "$ref": "#/definitions/Identifier"
-                }
+                },
+                "ltc:address": {
+          "$ref": "#/definitions/Address"
+        }
               },
               "required": [
                 "ltc:organisationalUnitName",
@@ -406,7 +409,7 @@
       },
       "Sub-collections": {
         "type": "object",
-        "description": "Details about a sub-collection. This object needs to be repeted for each sub-collection.",
+        "description": "Details about a sub-collection. This object needs to be repeted for each facility",
         "properties": {
           "ltc:organisationalUnit": {
             "type": "array",
@@ -596,10 +599,7 @@
         "required": ["ltc:organisationalUnit"]
       },
 
-      "required": [
-        "Institution",
-        "Collection"
-      ],
+      
       "dependentSchemas": {
         "ltc:conditionsOfAccess": {
           "oneOf": [
@@ -628,7 +628,11 @@
             }
           ]
         }
-      }
+      },
+      "required": [
+        "Institution",
+        "Collection"
+      ]
     }
   }
   
