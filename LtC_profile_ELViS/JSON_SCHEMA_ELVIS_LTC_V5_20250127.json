@@ -379,7 +379,7 @@
                 },
                 "ltc:conditionsOfAccess": {
                   "type": "string",
-                  "description": "The condition of access to this collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
+                  "description": "The conditions of access to this collection, this needs to be a link, the content must be at least the one included in the following link : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/. This needs to include : condition of loan, condition of sampling, condition of visit, condition for scientific publications",
                   "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
                   "$comment": "This field is required if the collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
                 },
@@ -446,7 +446,7 @@
 
                 "ltc:conditionsOfAccess": {
                   "type": "string",
-                  "description": "The condition of access to this sub-collection, this needs to be a link, the content must be at least the one included in the following page: https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/",
+                  "description": "The conditions of access to this collection, this needs to be a link, the content must be at least the one included in the following link : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/. This needs to include : condition of loan, condition of sampling, condition of visit, condition for scientific publications",
                   "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
                   "$comment": "This field is required if the sub-collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
                 },
@@ -609,6 +609,7 @@
                   "properties": {
                     "ltc:conditionsOfAccess": { "type": "string" },
                     "livingOrPreserved": { "type": "string" }
+                
                     
                   }
                 }
