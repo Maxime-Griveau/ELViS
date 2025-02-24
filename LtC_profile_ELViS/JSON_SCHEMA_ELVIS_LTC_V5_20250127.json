@@ -174,6 +174,12 @@
             "ltc:organisationUnitType"
           ]
         },
+        "ltc:conditionsOfAccess": {
+          "type": "string",
+          "description": "The conditions of access to this collection, this is corresponding the the general conditions of access to the collection policy for the establishment",
+          "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
+          "$comment": "This field is required for the institution level"
+        },
         "ltc:identifier": {
           "$ref": "#/definitions/Identifier"
         },
@@ -184,7 +190,8 @@
       "required": [
         "ltc:organisationalUnit",
         "ltc:Address",
-        "ltc:identifier"
+        "ltc:identifier",
+        "ltc:conditionsOfAccess"
       ]
     },
     "Facilities": {
@@ -379,9 +386,9 @@
                 },
                 "ltc:conditionsOfAccess": {
                   "type": "string",
-                  "description": "The conditions of access to this collection, this needs to be a link, the content must be at least the one included in the following link : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/. This needs to include : condition of loan, condition of sampling, condition of visit, condition for scientific publications",
+                  "description": "The conditions of access to the collection. Here, you need to specifiy for each type of need (loan, sampling, visit, garden observation, digitization) and for each collection, the specific type of conditions of Access",
                   "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
-                  "$comment": "This field is required if the collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
+                  "$comment": "This field is mandatory either for collections or for sub-collections (one off) (see, dependencies)"
                 },
                 "livingOrPreserved": {
                   "enum": [
@@ -446,9 +453,9 @@
 
                 "ltc:conditionsOfAccess": {
                   "type": "string",
-                  "description": "The conditions of access to this collection, this needs to be a link, the content must be at least the one included in the following link : https://collectionstrust.org.uk/accreditation/users-and-their-experiences/public-access/access-policy/. This needs to include : condition of loan, condition of sampling, condition of visit, condition for scientific publications",
+                  "description": "The conditions of access to the sub-collection. Here, you need to specifiy for each type of need (loan, sampling, visit, garden observation, digitization) and for each sub-collection, the specific type of conditions of Access",
                   "example": "https://www.fieldmuseum.org/science/research/area/fossils-meteorites/fossils-meteorites-policies",
-                  "$comment": "This field is required if the sub-collection has a condition of access, he can be in the collection or in the sub-collection not in both, but at least in one. (view dependencies)"
+                  "$comment": "This field is mandatory either for collections or for sub-collections (one off) (see, dependencies)"
                 },
                 "livingOrPreserved": {
                   "enum": [
