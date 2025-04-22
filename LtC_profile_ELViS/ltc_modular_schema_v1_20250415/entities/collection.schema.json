@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ELViS Latimer Core Schema (collection)",
   "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/entities/collection",
   "type": "object",
   "properties": {

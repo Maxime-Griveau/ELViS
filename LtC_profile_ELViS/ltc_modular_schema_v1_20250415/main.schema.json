@@ -72,7 +72,6 @@
           }
         }
       }
-    ],
-    "errorMessage": "ltc:conditionsOfAccess must be present in either Collection or SubCollection level."
+    ]
   }
 }
