@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/main",
+  "title": "ELViS Latimer Core Schema (Modular)",
+  "type": "object",
+  "properties": {
+    "Institution": {
+      "type": "object",
+      "properties": {
+        "Collections": {
+          "type": "array",
+          "items": {
+            "$ref": "./entities/collection.schema.json"
+          },
+          "SubCollections": {
+            "type": "array",
+            "$ref": "./entities/SubCollection.schema.json"
+          }
+        },
+        "Facilities": {
+          "type": "array",
+          "items": {
+            "$ref": "./entities/facility.schema.json"
+          },
+          "InstrumentOrService": {
+            "type": "array",
+             "$ref": "./entities/instrumentOrService.schema.json"
+          }
+        }
+      }
+    },
+    "required": [
+      "Institution"
+    ],
+    "oneOf": [
+      {
+        "properties": {
+          "Institution": {
+            "properties": {
+              "Collections": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "ltc:conditionsOfAccess"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "properties": {
+          "Institution": {
+            "properties": {
+              "Collections": {
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "SubCollections": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "ltc:conditionsOfAccess"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "errorMessage": "ltc:conditionsOfAccess must be present in either Collection or SubCollection level."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/definitions/identifier",
+  "type": "object",
+  "properties": {
+    
+    "ltc:identifierSource": {
+      "type": "string",
+      "description": "The source or creator of the identifier.",
+      "examples": [
+        "GBIF Registry",
+        "CETAF"
+      ]
+    },
+    "ltc:identifierType": {
+      "type": "string",
+      "description": "The type and format of the value in the identifier field.",
+      "examples": [
+        "CETAF_ID"
+      ]
+    },
+    "ltc:identifierValue": {
+      "type": "string",
+      "description": "An unambiguous reference.",
+      "examples": [
+        "https://cetaf.org/botanic-garden-meise-0"
+      ]
+    }
+  },
+  "required": [
+    "ltc:identifierSource",
+    "ltc:identifierType",
+    "ltc:identifierValue"
+  ]
+}

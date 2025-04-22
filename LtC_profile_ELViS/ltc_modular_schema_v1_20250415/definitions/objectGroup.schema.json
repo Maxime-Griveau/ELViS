@@ -1,0 +1,66 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/definitions/objectGroup",
+  "type": "object",
+  "properties": {
+    "ObjectGroup": {
+      "type": "object",
+      "items": {
+        "ltc:objectGroupName": {
+          "type": "string",
+          "description": "Collection's name in the local langage.",
+          "example": "Herbier national"
+        },
+        "ltc:alternativeObjectGroupName": {
+          "type": "string",
+          "description": "Collection's name, in english.",
+          "example": "National Herbarium"
+        },
+        "ltc:objectGroupType": {
+          "type": "string",
+          "description": "Object type, set to ‘ObjectGroup’.",
+          "const": "ObjectGroup"
+        },
+        "ltc:baseTypeOfObjectGroup": {
+          "type": "array",
+          "description": "Indicates the fundamental nature of the objects contained in this group.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "MaterialEntity",
+              "InformationArtefact",
+              "AbstractConcept"
+            ]
+          },
+          "minItems": 1
+        },
+        "ltc:hasorganisationUnit": {
+          "description": "Reference to the organizational unit (Institution) to which the collection belongs.",
+          "$ref": "../definitions/organisationalUnit.schema.json"
+        },
+        "ltc:description": {
+          "type": "string",
+          "description": "A short description of the collection."
+        },
+        "schema:url": {
+          "type": "string",
+          "description": "URL of the collection's webpage (not in LtC)",
+          "example": "https://science.mnhn.fr/institution/mnhn/item/search#zoology.vertebrates",
+          "format": "uri"
+        },
+        "ltc:hasStorageLocation": {
+          "description": "Reference to storage address, if applicable.",
+        "$ref": "../definitions/address.schema.json"
+        },
+        "ltc:identifier": {
+       "$ref": "../definitions/identifier.schema.json"
+        },
+        "required": [
+          "ltc:objectGroupName",
+          "ltc:objectGroupType",
+          "ltc:hasObjectClassification",
+          "ltc:hasorganisationUnit"
+        ]
+      }
+    }
+  }
+}

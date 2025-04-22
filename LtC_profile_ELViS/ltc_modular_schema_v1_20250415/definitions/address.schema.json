@@ -1,0 +1,104 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/definitions/address",
+  "type": "object",
+  "description": "A hierarchical representation of an address.",
+  "properties": {
+    "schema:addressCountry": {
+      "type": "object",
+      "properties": {
+        "schema:addressCountry": {
+          "type": "object",
+          "description": "The country in which the entity is located.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "The country code using ISO 3166 (Alpha 3).",
+              "examples": [
+                "AFG",
+                "FRA",
+                "FIN"
+              ]
+            }
+          },
+          "required": [
+            "code"
+          ]
+        },
+        "schema:addressRegion": {
+          "type": "object",
+          "description": "The region in the country.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the region.",
+              "examples": [
+                "Pays-de-la-Loire",
+                "Valais"
+              ]
+            }
+          }
+        },
+        "schema:addressLocality": {
+          "type": "object",
+          "description": "The locality in the region.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the locality.",
+              "examples": [
+                "Geneva",
+                "Paris",
+                "London"
+              ]
+            },
+            "schema:streetAddress": {
+              "type": "string",
+              "description": "The street address.",
+              "examples": [
+                "Rue de la Navigation 52",
+                "57 rue Cuvier"
+              ]
+            },
+            "schema:postalCode": {
+              "type": "integer",
+              "description": "The postal code of the address.",
+              "examples": [
+                75005,
+                1201
+              ]
+            },
+            "schema:GeoCoordinates":{
+              "type": "object",
+              "description": "The geographical coordinates of the address.",
+              "properties": {
+                "latitude": {
+                  "type": "number",
+                  "description": "The latitude of the address.",
+                  "examples": [
+                    46.2044,
+                    51.5074
+                  ]
+                },
+                "longitude": {
+                  "type": "number",
+                  "description": "The longitude of the address.",
+                  "examples": [
+                    6.1432,
+                    -0.1278
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "name",
+            "schema:streetAddress"
+          ]
+        }
+      },
+      "required": [
+        "schema:addressCountry"
+      ]
+    }
+  }
+}

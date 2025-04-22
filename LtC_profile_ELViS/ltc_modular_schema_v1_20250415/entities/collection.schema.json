@@ -1,0 +1,26 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/entities/collection",
+  "type": "object",
+  "properties": {
+    "ltc:hasObjectGroup": {
+      "$ref": "../definitions/objectGroup.schema.json"
+    },
+ 
+    "ltc:hasIdentifier": {
+      "$ref": "../definitions/identifier.schema.json"
+    },
+    "ltc:hasAddress": {
+      "$ref": "../definitions/address.schema.json"
+    },
+    "ltc:hasObjectClassification":{
+      "$ref": "../definitions/objectClassification.schema.json"
+    }
+    
+
+  },
+  "required": [
+    "ltc:hasObjectGroup",
+    "ltc:hasIdentifier",
+    "ltc:hasObjectClassification"
+  ]
+}

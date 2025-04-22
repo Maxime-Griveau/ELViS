@@ -1,0 +1,25 @@
+{
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/entities/institution",
+  "type": "object",
+  "properties": {
+    "ltc:organisationalUnit": {
+      "$ref": "../definitions/organisationalUnit.schema.json"
+    },
+    "ltc:conditionsOfAccess": {
+      "type": "string",
+      "description": "General terms of the institution."
+    },
+    "ltc:identifier": {
+      "$ref": "../definitions/identifier.schema.json"
+    },
+    "ltc:hasAddress": {
+      "$ref": "../definitions/address.schema.json"
+    }
+  },
+  "required": [
+    "ltc:organisationalUnit",
+    "ltc:identifier",
+    "ltc:address",
+    "ltc:conditionsOfAccess"
+  ]
+}
