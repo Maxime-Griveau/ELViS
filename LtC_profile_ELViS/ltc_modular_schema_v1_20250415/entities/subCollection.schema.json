@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ELViS Latimer Core Schema (subCollection)",
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/entities/subCollection",
+  "type": "object",
+  "properties": {
+    "ltc:hasObjectGroup": {
+      "$ref": "../definitions/objectGroup.schema.json"
+    },
+ 
+    "ltc:hasObjectClassification":{
+      "$ref": "../definitions/objectClassification.schema.json"
+    },
+    "ltc:hasidentifier": {
+      "$ref": "../definitions/identifier.schema.json"
+    }
+  },
+  "required": [
+    "ltc:hasObjectGroup",
+    "ltc:hasIdentifier",
+    "ltc:hasObjectClassification"
+  ]
+}

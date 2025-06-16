@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ELViS Latimer Core Schema (Instrument or service)",
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/entities/instrumentOrService",
+  "type": "object",
+  "properties": {
+    "ltc:hasOrganisationalUnit": {
+      "$ref": "../definitions/organisationalUnit.schema.json"
+    },
+    "schema:image": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "ltc:identifier": {
+      "$ref": "../definitions/identifier.schema.json"
+    }
+  },
+  "required": [
+    "ltc:hasOrganisationalUnit"
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ELViS Latimer Core Schema (objectClassification)",
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/definitions/objectClassification",
+  "type": "object",
+  "properties": {
+    "ltc:isTopParent": {
+      "type": "boolean",
+      "description": "true for a collection, false for a sub-collection."
+    },
+    "ltc:objectClassificationLevel": {
+      "type": "string",
+      "description": "Classification level: ‘discipline’ or ‘category’, will be set to discipline conditionally if at collection level and to category if at sub-collection level.",
+      "enum": ["discipline", "category"]
+    },
+    "ltc:objectClassificationName": {
+      "type": "string",
+      "description": "Classification name. Will be a discipline or a category, depending on the level. (see the allOf condition below for its content)"
+    },
+    "ltc:hasParentOrganisationalUnit": {
+      "type": "string",
+      "description": "Name of parent organizational unit (required to determine the discipline associated with a category)."
+    }
+  },
+  "required": ["ltc:isTopParent", "ltc:objectClassificationLevel", "ltc:objectClassificationName"],
+  "allOf": [
+    {
+      "if": {
+        "properties": { "isTopParent": { "const": true } }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationLevel": { "const": "discipline" },
+          "ltc:objectClassificationName": {
+            "enum": [
+              "Anthropology",
+              "Botany",
+              "Zoology",
+              "Microbiology",
+              "Palaeontology",
+              "Other Biodiversity/Geodiversity",
+              "Earth Geology",
+              "Astrogeology",
+              "Ecology"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "ltc:isTopParent": { "const": false } }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Anthropology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "enum": ["Human remains", "Hominids remains"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Botany" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "enum": [
+              "Macrofungi, Lichens & Myxomycetes (Mycology)",
+              "Algae",
+              "Bryophytes",
+              "Pteridophytes",
+              "Seed plants",
+              "Plant Genetic Resources",
+              "Other botany objects"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Zoology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "enum": [
+              "Insects",
+              "Arachnids",
+              "Crustaceans & Myriapods",
+              "Porifera (sponges)",
+              "Mollusca",
+              "Cnidaria",
+              "Echinodermata",
+              "Fishes",
+              "Amphibians",
+              "Reptiles",
+              "Birds",
+              "Mammals",
+              "Animal Genetic Resources",
+              "Other zoology objects"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Microbiology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "enum": [
+              "Pages",
+              "Bacteria & Archaea",
+              "Plasmids",
+              "Protozoa",
+              "Eukaryotic microorganisms",
+              "Viruses (animal and plant viruses)",
+              "Microfungi",
+              "Algae (in microbiology collection)",
+              "Other microbiology objects"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Palaeontology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "enum": [
+              "Botany fossils",
+              "Invertebrate fossils",
+              "Vertebrate fossils",
+              "Other palaeontology objects"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Earth-Geology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "enum": [
+              "Minerals and gems",
+              "Rocks",
+              "Loose sediment sample",
+              "Water-ice samples",
+              "Liquid or gaseous matter sample",
+              "Mixed geology objects"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Astrogeology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "objectClassificationName": {
+            "type": "string",
+            "$comment": "Controlled vocabulary required for Astrogeology"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ltc:hasParentOrganisationalUnit": { "const": "Ecology" },
+          "ltc:objectClassificationLevel": { "const": "category" }
+        }
+      },
+      "then": {
+        "properties": {
+          "ltc:objectClassificationName": {
+            "type": "string",
+            "$comment": "Controlled vocabulary required for Ecology"
+          }
+        }
+      }
+    }
+  ]
+}

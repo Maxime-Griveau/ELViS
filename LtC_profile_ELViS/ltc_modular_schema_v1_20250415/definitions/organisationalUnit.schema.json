@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ELViS Latimer Core Schema (Organisational Unit)",
+  "$id": "https://schemas.dissco.tech/schemas/elvis/ltc_profile/definitions/organisationalUnit",
+  "type": "object",
+  "properties": {
+    "ltc:organisationalUnit":{
+      "ltc:organisationalUnitName": {
+        "type": "string",
+        "description": "The name of the organisational unit, which is either an institution or a facility (which is always attached to an institution using 'hasParentOrganisationalUnit') or an instrument / service (which is always attached to an facility using 'hasParentOrganisationalUnit')  in the local language.",
+        "example": "Muséum national d'histoire naturelle"
+      },
+      "ltc:organisationalUnitType": {
+        "type": "string",
+        "enum": [
+          "Institution",
+          "Facility",
+          "Instrument",
+          "Service"
+        ]
+      },
+      "ltc:description": {
+        "type": "string",
+        "description": "A short text describing the organisational unit.",
+        "example": "Le muséum national d'histoire naturelle (Paris, France) héberge des collections depuis 400 ans, c'est l'un des plus grands du monde avec près de 68 millions de spécimens conservés."
+      },
+
+      "schema:url": {
+        "type": "string",
+        "description": "The URL of the organisational unit's website (this is not Latimer Core compliant as schema:url is not in the standard).",
+        "example": "https://www.mnhn.fr/fr",
+        "format": "uri"
+      },
+      "ltc:hasParentOrganisationalUnit": {
+        "type": "string",
+        "description":"This property refers to one or more related parent instances of the OrganisationalUnit class. In this case, the top Parent will be an institution (topParent) ",
+        "example" : "Muséum national d'histoire naturelle, Naturalis Biodiversity center, University of Leiden, Laboratoire d'anatomie comparée"
+      },
+   
+
+    "required": [
+      "ltc:organisationalUnitName",
+      "ltc:organisationalUnitType",
+      "ltc:hasAddres"
+    ]
+    }
+  }
+ 
+}
